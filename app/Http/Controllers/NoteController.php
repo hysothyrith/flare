@@ -25,7 +25,7 @@ class NoteController extends Controller
             $note->save();
             return response()->json(['success' => 'Note created'], 201);
         } catch (QueryException $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
@@ -35,7 +35,6 @@ class NoteController extends Controller
             return new NoteResource(Note::where('id', $id)
                 ->where('user_id', $request->user()['id'])
                 ->firstOrFail());
-
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Note not found'], 400);
         }

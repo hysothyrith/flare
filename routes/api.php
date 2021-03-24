@@ -16,10 +16,14 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
 
-
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('user/notes', [UserNoteController::class, 'index']);
-    Route::get('user/courses', [UserCourseController::class, 'index']);
+    Route::prefix('/user')->name('user.')->group(function () {
+        Route::apiResources([
+            'notes' => UserNoteController::class,
+            'courses' => UserCourseController::class
+        ]);
+    });
+
     Route::apiResources([
         'courses' => CourseController::class,
         'lessons' => LessonController::class,
