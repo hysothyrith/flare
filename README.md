@@ -2,8 +2,9 @@
 
 ## Getting started
 
+Firstly, configure the database in `.env` based on `.env.example`. Then run the following:
+
 ```shell
-cp .env.example .env
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 php artisan jwt:secret
 php artisan migrate
