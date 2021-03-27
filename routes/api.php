@@ -27,6 +27,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResources([
         'courses' => CourseController::class,
         'lessons' => LessonController::class,
-        'notes' => NoteController::class
+        'lessons.note' => NoteController::class,
+
     ]);
+
+    Route::resource('notes', NoteController::class)->only(['update', 'destroy']);
 });

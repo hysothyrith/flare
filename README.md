@@ -93,3 +93,9 @@ DELETE /notes
 ```http request
 PATCH /notes/{id}
 ```
+
+## RFC Routes
+
+```http request
+GET /lessons/{lesson-id}/note
+```

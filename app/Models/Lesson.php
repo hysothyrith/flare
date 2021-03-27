@@ -16,4 +16,8 @@ class Lesson extends Model
     public function course() {
         return $this->belongsTo(Course::class);
     }
+
+    public function notes() {
+        return $this->hasMany(Note::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\NoteResource;
+use App\Models\Lesson;
 use App\Models\Note;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -10,33 +11,32 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-    public function store(Request $request)
+    public function index($lessonId, Request $request)
     {
-        $request->validate([
-            'lesson_id' => 'required|exists:lessons,id',
-            'note_content' => 'required'
-        ]);
-
         try {
-            $note = new Note;
-            $note->user_id = $request->user()['id'];
-            $note->lesson_id = $request->lesson_id;
-            $note->content = $request->note_content;
-            $note->save();
-            return response()->json(['success' => 'Note created'], 201);
-        } catch (QueryException $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            Lesson::findOrFail($lessonId);
+            return Note::where('lesson_id', $lessonId)->where('user_id', $request->user()['id'])->first() ?? response()->noContent();
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Invalid lesson'], 400);
         }
     }
 
-    public function show($id, Request $request)
+    public function store($lessonId, Request $request)
     {
+        $request->validate([
+            'note_content' => 'required'
+        ]);
         try {
-            return new NoteResource(Note::where('id', $id)
-                ->where('user_id', $request->user()['id'])
-                ->firstOrFail());
+            Lesson::findOrFail($lessonId);
+
+            $note = new Note;
+            $note->user_id = $request->user()['id'];
+            $note->lesson_id = $lessonId;
+            $note->content = $request->note_content;
+            $note->save();
+            return response()->json(['success' => 'Note created'], 201);
         } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Note not found'], 400);
+            return response()->json(['error' => 'Invalid lesson'], 400);
         }
     }
 
