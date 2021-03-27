@@ -23,6 +23,10 @@ class CourseController extends Controller
             }
         }
 
+        if ($request->query('limit')) {
+            $courses->limit($request->query('limit'));
+        }
+
         return new CourseCollection($courses->get());
     }
 
