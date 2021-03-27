@@ -21,6 +21,8 @@ class CourseResource extends JsonResource
             'category' => $this->category->name,
             'author' => $this->author->first_name . ' ' . $this->author->last_name,
             'cover_image' => $this->cover_image,
+            'number_of_lesson' => $this->lessons->count(),
+            'duration' => $this->lessons->sum('duration'),
             'lessons' => new LessonCollection($this->lessons)
         ];
     }
