@@ -23,7 +23,7 @@ class CourseResource extends JsonResource
             'cover_image' => $this->cover_image,
             'number_of_lesson' => $this->lessons->count(),
             'duration' => $this->lessons->sum('duration'),
-            'lessons' => new LessonCollection($this->lessons)
+            'lessons' => LessonSummaryResource::collection($this->lessons)
         ];
     }
 }

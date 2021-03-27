@@ -73,8 +73,38 @@ GET /courses/{id}
 ### Lessons
 
 ```http request
+GET /lessons
+```
+
+|Query|Type|Required|
+|---|---|---|
+|hasNote|boolean|Yes|
+
+```http request
 GET /lessons/{id}
 ```
+
+#### Note
+
+```http request
+GET /lessons/{lesson-id}/note
+```
+
+```http request
+POST /lessons/{lesson-id}/note
+```
+
+### Notes
+
+```http request
+DELETE /notes/{id}
+```
+
+```http request
+PATCH /notes/{id}
+```
+
+## Deprecated Routes
 
 ### Notes
 
@@ -84,18 +114,4 @@ GET /notes/{id}
 
 ```http request
 POST /notes
-```
-
-```http request
-DELETE /notes
-```
-
-```http request
-PATCH /notes/{id}
-```
-
-## RFC Routes
-
-```http request
-GET /lessons/{lesson-id}/note
 ```
