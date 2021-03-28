@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\NoteController;
-use App\Http\Controllers\UserCourseController;
-use App\Http\Controllers\UserNoteController;
+
+//use App\Http\Controllers\UserCourseController;
+//use App\Http\Controllers\UserNoteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
@@ -17,18 +18,16 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::prefix('/user')->name('user.')->group(function () {
-        Route::apiResources([
-            'notes' => UserNoteController::class,
-            'courses' => UserCourseController::class
-        ]);
-    });
+//    Route::prefix('/user')->name('user.')->group(function () {
+//        Route::apiResources([
+//            'courses' => UserCourseController::class
+//        ]);
+//    });
 
     Route::apiResources([
         'courses' => CourseController::class,
         'lessons' => LessonController::class,
-        'lessons.note' => NoteController::class,
-
+        'notes' => NoteController::class
     ]);
 
     Route::resource('notes', NoteController::class)->only(['update', 'destroy']);

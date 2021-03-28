@@ -76,10 +76,6 @@ GET /courses/{id}
 GET /lessons
 ```
 
-|Query|Type|Required|
-|---|---|---|
-|hasNote|boolean|Yes|
-
 ```http request
 GET /lessons/{id}
 ```
@@ -96,22 +92,34 @@ POST /lessons/{lesson-id}/note
 
 ### Notes
 
+Create a new note
+
+```http request
+POST /notes
+```
+
+Get all a user's notes
+
+```http request
+GET /notes
+```
+
+|Param|Type|Required|Description|
+|---|---|---|---|
+|lesson_id|int|No|Get the note for a specific lesson|
+
+Delete a note
+
 ```http request
 DELETE /notes/{id}
 ```
+
+Update a note's content
 
 ```http request
 PATCH /notes/{id}
 ```
 
-## Deprecated Routes
-
-### Notes
-
-```http request
-GET /notes/{id}
-```
-
-```http request
-POST /notes
-```
+|Param|Type|Required|
+|---|---|---|
+|note_content|string|Yes|
