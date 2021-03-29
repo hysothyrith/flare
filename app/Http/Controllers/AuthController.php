@@ -62,7 +62,7 @@ class AuthController extends Controller
             ['password' => bcrypt($request->password)]
         ));
 
-        $token = auth()->attempt($validator->validated());
+        $token = auth()->refresh();
         return $this->createNewToken($token, 201);
     }
 
