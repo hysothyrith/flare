@@ -66,6 +66,11 @@ GET /user/notes
 GET /courses
 ```
 
+|Param|Type|Required|Description|
+|---|---|---|---|
+|enrolled|bool|No|Get the courses the current user is/isn't enrolled in|
+|limit|int|No|Limit number of courses returned|
+
 ```http request
 GET /courses/{id}
 ```
@@ -73,21 +78,7 @@ GET /courses/{id}
 ### Lessons
 
 ```http request
-GET /lessons
-```
-
-```http request
 GET /lessons/{id}
-```
-
-#### Note
-
-```http request
-GET /lessons/{lesson-id}/note
-```
-
-```http request
-POST /lessons/{lesson-id}/note
 ```
 
 ### Notes
